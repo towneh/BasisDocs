@@ -85,6 +85,13 @@ supports two extra forms: `"---Label---"` inserts a sidebar group heading, and
 
 ## Images
 
+**Illustrate procedures with screenshots.** Steps that involve the Unity
+Inspector, a component, a prefab, or an in-world result are much clearer with a
+picture. Add a supporting image at the point in the instructions where the
+reader needs it — show the component with the relevant fields filled in, the
+prefab in the scene, or the finished result. Match the surrounding pages, which
+lean on screenshots heavily (see `content/docs/world/scene-props.mdx`).
+
 Put images under `public/img/<section>/` and reference them with a root-relative
 path (the leading `/img` maps to `public/img`):
 
@@ -97,6 +104,30 @@ name exactly — for example the `world` docs section stores its images under
 `public/img/worlds/`. When adding a new section, pick a clear, lowercase folder
 name and keep all of that section's images in it. Prefer reasonably sized PNGs
 or WebP; very large screenshots slow the page down.
+
+### Image placeholders
+
+A markdown image reference to a file that doesn't exist yet **fails the build**
+(local images are resolved and measured at build time). So if you're writing a
+page before the screenshots are ready, don't leave a live `![](…)` pointing at a
+missing file. Instead leave a **placeholder comment** that records exactly what
+the image should show and where it goes — the build stays green, and whoever
+adds the screenshot has clear instructions:
+
+```mdx
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-streaming-inspector.png
+    Show:  the Basis Media Player Streaming component with the Stream Url field filled in.
+    When ready, replace this comment with:
+    ![The Basis Media Player Streaming component with a stream URL set](/img/worlds/media-player-streaming-inspector.png)
+*/}
+```
+
+`{/* … */}` is an MDX comment — it doesn't render on the page and won't break
+the build. To add the screenshot later, drop the file at the named path and
+replace the whole comment with the `![…](…)` line it contains. New pages should
+include these placeholders wherever a supporting image is intended, so the image
+requirements travel with the page.
 
 ## Localisation
 
@@ -176,8 +207,10 @@ When in doubt, run `npm run build` — it will point at the offending line.
    frontmatter.
 2. Add `"<slug>"` to that section's `content/docs/<section>/meta.json` `pages`
    array, in the position you want it.
-3. Put any screenshots under `public/img/<section>/` and reference them as
-   `/img/<section>/<file>`.
+3. Add supporting screenshots under `public/img/<section>/` and reference them
+   as `/img/<section>/<file>` at the steps that need them. If a screenshot isn't
+   ready yet, leave an **image placeholder comment** (see [Image placeholders](#image-placeholders))
+   instead of a live reference to a missing file.
 4. Cross-link related pages with `/en/docs/...` links.
 5. Run `npm run build` and confirm it passes.
 6. Open a pull request. Pushes to `main` deploy automatically.

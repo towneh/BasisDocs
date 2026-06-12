@@ -21,6 +21,13 @@ A working video screen is a small stack of components on one GameObject:
 The player is designed for **live broadcast** — RTSP, RTMP, MPEG-TS, fMP4 and HLS over the network. Point it at a stream URL and it starts playing; it does not need a local video file.
 </Callout>
 
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-screen-in-world.png
+    Show:  a finished video screen playing live video in a Basis world (the result the reader is building toward).
+    When ready, replace this comment with:
+    ![A live video screen playing in a Basis world](/img/worlds/media-player-screen-in-world.png)
+*/}
+
 ## Quick start
 
 The fastest path is the ready-made prefab.
@@ -29,6 +36,13 @@ The fastest path is the ready-made prefab.
 2. Select it and find the **Basis Media Player Streaming** component.
 3. Set **Stream Url** to your stream (for example `rtspt://stream.vrcdn.live/live/vrcdn`).
 4. Position and scale the screen mesh where you want the video.
+
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-streaming-inspector.png
+    Show:  the MediaPlayerStreaming prefab selected, with the Basis Media Player Streaming component in the Inspector and the Stream Url field filled in.
+    When ready, replace this comment with:
+    ![The Basis Media Player Streaming component with a stream URL set](/img/worlds/media-player-streaming-inspector.png)
+*/}
 
 That's it — the prefab carries the player, a display surface and an audio source already wired together, and it loads the URL on play.
 
@@ -69,9 +83,23 @@ Add **`BasisVideoMaterialOutput`** to the GameObject and assign **Target Rendere
 - **Projection Mode** — `Mono` for normal flat video, or `SideBySideLR` / `OverUnderTB` for stereoscopic sources, or `Equirect360` / `VR180` for spherical video on a matching sphere mesh and shader.
 - **Aspect Mode** — `FitInside` letterboxes to preserve the source shape, `FitOutside` crops to fill, `Original` samples untransformed.
 
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-material-output-inspector.png
+    Show:  the BasisVideoMaterialOutput component in the Inspector with Target Renderer assigned and Texture Property Name set (e.g. _BaseMap).
+    When ready, replace this comment with:
+    ![BasisVideoMaterialOutput with a target renderer assigned](/img/worlds/media-player-material-output-inspector.png)
+*/}
+
 ### On a UI canvas (RawImage)
 
 Add **`BasisVideoDisplay`** and assign **Target Raw Image**. Optionally assign an **Aspect Fitter** (`AspectRatioFitter`) so the image tracks the stream's aspect ratio automatically. See [UI Canvas](/en/docs/world/ui-canvas) for setting up the canvas itself.
+
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-video-display-inspector.png
+    Show:  the BasisVideoDisplay component in the Inspector with Target Raw Image (and optionally Aspect Fitter) assigned, on a canvas RawImage object.
+    When ready, replace this comment with:
+    ![BasisVideoDisplay bound to a RawImage on a canvas](/img/worlds/media-player-video-display-inspector.png)
+*/}
 
 ## Audio
 
@@ -90,6 +118,13 @@ For surround content you can route each channel to its own positioned `AudioSour
 3. The **`BasisMediaPlayerMultiChannelAudio`** component holds an **Outputs** list of `AudioSource`s — one per speaker.
 4. Each output `AudioSource` carries a **`BasisMediaAudioChannel`** component that selects which channel it plays: **Channel 1–8**, or a **Stereo (downmix)** of the whole stream.
 
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-multichannel-audio.png
+    Show:  the BasisMediaPlayerMultiChannelAudio component with its Outputs list of AudioSources, alongside a BasisMediaAudioChannel component on one output with the Channel dropdown open (Channel 1-8 / Stereo).
+    When ready, replace this comment with:
+    ![Multichannel audio outputs with per-source channel selection](/img/worlds/media-player-multichannel-audio.png)
+*/}
+
 The same channel can feed two `AudioSource`s in different places, and an output whose channel isn't present in the stream simply stays silent — so a 5.1 layout still behaves sensibly when fed a stereo source.
 
 <Callout type="info">
@@ -103,6 +138,13 @@ For a shared screen, add **`BasisMediaPlayerNetworking`**. It synchronises the U
 - **Allow Anyone To Take Control** — when on (default), any player can change the video or control playback. When off, only the current owner can.
 - **Admin Only** — restrict control to players with the `basis.mediaplayer.control` (or admin `*`) permission. Overrides the setting above.
 - **Drift Seek Threshold Seconds** — remote viewers seek to catch up when they drift more than this far from the owner's position. Set to 0 to disable.
+
+{/* IMAGE PLACEHOLDER
+    File:  public/img/worlds/media-player-networking-inspector.png
+    Show:  the BasisMediaPlayerNetworking component in the Inspector with the Permissions (Admin Only / Allow Anyone To Take Control) and Sync fields visible.
+    When ready, replace this comment with:
+    ![BasisMediaPlayerNetworking permission and sync settings](/img/worlds/media-player-networking-inspector.png)
+*/}
 
 <Callout type="warn">
 Network sources should go through the world's trusted-URL flow so players consent before a screen connects to an arbitrary address. Keep control gated (`Admin Only` or owner-only) on public screens you don't want any visitor re-pointing.
