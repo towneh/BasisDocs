@@ -92,18 +92,23 @@ reader needs it — show the component with the relevant fields filled in, the
 prefab in the scene, or the finished result. Match the surrounding pages, which
 lean on screenshots heavily (see `content/docs/world/scene-props.mdx`).
 
-Put images under `public/img/<section>/` and reference them with a root-relative
-path (the leading `/img` maps to `public/img`):
+Each page keeps its images in its own folder named after the page —
+`public/img/<page-slug>/`, where `<page-slug>` is the page's file name without
+the `.mdx` extension (so `media-player.mdx` uses `public/img/media-player/`).
+Reference them with a root-relative path (the leading `/img` maps to
+`public/img`):
 
 ```mdx
-![Inspector showing the Basis Media Player component](/img/worlds/media-player-inspector.png)
+![The Basis Media Player Streaming component](/img/media-player/streaming-inspector.png)
 ```
 
-Section image folders are named loosely and don't always match the docs folder
-name exactly — for example the `world` docs section stores its images under
-`public/img/worlds/`. When adding a new section, pick a clear, lowercase folder
-name and keep all of that section's images in it. Prefer reasonably sized PNGs
-or WebP; very large screenshots slow the page down.
+Keep all of a page's images in that one folder, and use lowercase, hyphenated
+file names. Prefer reasonably sized PNGs or WebP; very large screenshots slow
+the page down.
+
+Some older sections store their images in a shared per-section folder (for
+example `public/img/avatars/`); that's an earlier grouping. New pages use the
+per-page folder above.
 
 ### Image placeholders
 
@@ -116,10 +121,10 @@ adds the screenshot has clear instructions:
 
 ```mdx
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-streaming-inspector.png
+    File:  public/img/media-player/streaming-inspector.png
     Show:  the Basis Media Player Streaming component with the Stream Url field filled in.
     When ready, replace this comment with:
-    ![The Basis Media Player Streaming component with a stream URL set](/img/worlds/media-player-streaming-inspector.png)
+    ![The Basis Media Player Streaming component with a stream URL set](/img/media-player/streaming-inspector.png)
 */}
 ```
 
@@ -207,9 +212,9 @@ When in doubt, run `npm run build` — it will point at the offending line.
    frontmatter.
 2. Add `"<slug>"` to that section's `content/docs/<section>/meta.json` `pages`
    array, in the position you want it.
-3. Add supporting screenshots under `public/img/<section>/` and reference them
-   as `/img/<section>/<file>` at the steps that need them. If a screenshot isn't
-   ready yet, leave an **image placeholder comment** (see [Image placeholders](#image-placeholders))
+3. Add supporting screenshots under `public/img/<page-slug>/` and reference them
+   as `/img/<page-slug>/<file>` at the steps that need them. If a screenshot
+   isn't ready yet, leave an **image placeholder comment** (see [Image placeholders](#image-placeholders))
    instead of a live reference to a missing file.
 4. Cross-link related pages with `/en/docs/...` links.
 5. Run `npm run build` and confirm it passes.

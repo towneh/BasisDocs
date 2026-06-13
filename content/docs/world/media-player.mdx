@@ -22,10 +22,10 @@ The player is designed for **live broadcast** — RTSP, RTMP, MPEG-TS, fMP4 and 
 </Callout>
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-screen-in-world.png
+    File:  public/img/media-player/screen-in-world.png
     Show:  a finished video screen playing live video in a Basis world (the result the reader is building toward).
     When ready, replace this comment with:
-    ![A live video screen playing in a Basis world](/img/worlds/media-player-screen-in-world.png)
+    ![A live video screen playing in a Basis world](/img/media-player/screen-in-world.png)
 */}
 
 ## Quick start
@@ -38,10 +38,10 @@ The fastest path is the ready-made prefab.
 4. Position and scale the screen mesh where you want the video.
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-streaming-inspector.png
+    File:  public/img/media-player/streaming-inspector.png
     Show:  the MediaPlayerStreaming prefab selected, with the Basis Media Player Streaming component in the Inspector and the Stream Url field filled in.
     When ready, replace this comment with:
-    ![The Basis Media Player Streaming component with a stream URL set](/img/worlds/media-player-streaming-inspector.png)
+    ![The Basis Media Player Streaming component with a stream URL set](/img/media-player/streaming-inspector.png)
 */}
 
 That's it — the prefab carries the player, a display surface and an audio source already wired together, and it loads the URL on play.
@@ -84,10 +84,10 @@ Add **`BasisVideoMaterialOutput`** to the GameObject and assign **Target Rendere
 - **Aspect Mode** — `FitInside` letterboxes to preserve the source shape, `FitOutside` crops to fill, `Original` samples untransformed.
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-material-output-inspector.png
+    File:  public/img/media-player/material-output-inspector.png
     Show:  the BasisVideoMaterialOutput component in the Inspector with Target Renderer assigned and Texture Property Name set (e.g. _BaseMap).
     When ready, replace this comment with:
-    ![BasisVideoMaterialOutput with a target renderer assigned](/img/worlds/media-player-material-output-inspector.png)
+    ![BasisVideoMaterialOutput with a target renderer assigned](/img/media-player/material-output-inspector.png)
 */}
 
 ### On a UI canvas (RawImage)
@@ -95,10 +95,10 @@ Add **`BasisVideoMaterialOutput`** to the GameObject and assign **Target Rendere
 Add **`BasisVideoDisplay`** and assign **Target Raw Image**. Optionally assign an **Aspect Fitter** (`AspectRatioFitter`) so the image tracks the stream's aspect ratio automatically. See [UI Canvas](/en/docs/world/ui-canvas) for setting up the canvas itself.
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-video-display-inspector.png
+    File:  public/img/media-player/video-display-inspector.png
     Show:  the BasisVideoDisplay component in the Inspector with Target Raw Image (and optionally Aspect Fitter) assigned, on a canvas RawImage object.
     When ready, replace this comment with:
-    ![BasisVideoDisplay bound to a RawImage on a canvas](/img/worlds/media-player-video-display-inspector.png)
+    ![BasisVideoDisplay bound to a RawImage on a canvas](/img/media-player/video-display-inspector.png)
 */}
 
 ## Audio
@@ -144,17 +144,17 @@ To configure it on your own player:
 5. Add every speaker `AudioSource` to the **Outputs** list on `BasisMediaPlayerMultiChannelAudio`.
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-multichannel-audio.png
+    File:  public/img/media-player/multichannel-audio.png
     Show:  the BasisMediaPlayerMultiChannelAudio component with its Outputs list of AudioSources, alongside a BasisMediaAudioChannel component on one output with the Channel dropdown open (Channel 1-8 / Stereo).
     When ready, replace this comment with:
-    ![Multichannel audio outputs with per-source channel selection](/img/worlds/media-player-multichannel-audio.png)
+    ![Multichannel audio outputs with per-source channel selection](/img/media-player/multichannel-audio.png)
 */}
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-speaker-layout.png
+    File:  public/img/media-player/speaker-layout.png
     Show:  the speaker AudioSource objects positioned around the screen/listening area in the Scene view (front L/C/R, surrounds, etc.), illustrating the channel-to-world layout.
     When ready, replace this comment with:
-    ![Channel speaker objects positioned around the listening area](/img/worlds/media-player-speaker-layout.png)
+    ![Channel speaker objects positioned around the listening area](/img/media-player/speaker-layout.png)
 */}
 
 #### Useful behaviours
@@ -177,10 +177,10 @@ For a shared screen, add **`BasisMediaPlayerNetworking`**. It synchronises the U
 - **Drift Seek Threshold Seconds** — remote viewers seek to catch up when they drift more than this far from the owner's position. Set to 0 to disable.
 
 {/* IMAGE PLACEHOLDER
-    File:  public/img/worlds/media-player-networking-inspector.png
+    File:  public/img/media-player/networking-inspector.png
     Show:  the BasisMediaPlayerNetworking component in the Inspector with the Permissions (Admin Only / Allow Anyone To Take Control) and Sync fields visible.
     When ready, replace this comment with:
-    ![BasisMediaPlayerNetworking permission and sync settings](/img/worlds/media-player-networking-inspector.png)
+    ![BasisMediaPlayerNetworking permission and sync settings](/img/media-player/networking-inspector.png)
 */}
 
 <Callout type="warn">
