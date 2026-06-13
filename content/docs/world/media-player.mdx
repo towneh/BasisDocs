@@ -34,7 +34,7 @@ The fastest path is the ready-made prefab.
 
 1. Drag **`Prefabs/MediaPlayerStreaming`** from the Media Player package into your scene.
 2. Select it and find the **Basis Media Player Streaming** component.
-3. Set **Stream Url** to your stream (for example `rtspt://stream.vrcdn.live/live/vrcdn`).
+3. Set **Stream Url** to your stream (for example `rtspt://stream.example.com/live/mystream`).
 4. Position and scale the screen mesh where you want the video.
 
 {/* IMAGE PLACEHOLDER
@@ -51,7 +51,7 @@ To build a screen from scratch instead, add the components yourself:
 ```csharp
 var player = gameObject.AddComponent<BasisMediaPlayer>();
 gameObject.AddComponent<BasisVideoMaterialOutput>().TargetRenderer = screenRenderer;
-player.LoadUrl("rtspt://stream.vrcdn.live/live/vrcdn"); // auto-plays
+player.LoadUrl("rtspt://stream.example.com/live/mystream"); // auto-plays
 ```
 
 ## Choosing a stream URL
@@ -60,14 +60,14 @@ The player picks the right protocol from the URL scheme. Use the lowest-latency 
 
 | Scheme | Best for | Example |
 | --- | --- | --- |
-| `rtspt://` | PC / VR, lowest latency (RTP over TCP) | `rtspt://stream.vrcdn.live/live/vrcdn` |
-| `https://….ts` | Quest / Android (MPEG-TS over HTTPS) | `https://stream.vrcdn.live/live/vrcdn.live.ts` |
-| `rtmp://` | RTMP pull | `rtmp://stream.vrcdn.live/live/vrcdn` |
-| `https://….mp4` | Fragmented MP4 over HTTPS | `https://stream.vrcdn.live/live/vrcdn.live.mp4` |
-| `https://….m3u8` | HLS / Low-Latency HLS (Windows) | `https://stream.example/live/index.m3u8` |
+| `rtspt://` | PC / VR, lowest latency (RTP over TCP) | `rtspt://stream.example.com/live/mystream` |
+| `https://….ts` | Quest / Android (MPEG-TS over HTTPS) | `https://stream.example.com/live/mystream.ts` |
+| `rtmp://` | RTMP pull | `rtmp://stream.example.com/live/mystream` |
+| `https://….mp4` | Fragmented MP4 over HTTPS | `https://stream.example.com/live/mystream.mp4` |
+| `https://….m3u8` | HLS / Low-Latency HLS (Windows) | `https://stream.example.com/live/index.m3u8` |
 
 <Callout type="info">
-Many broadcasters (such as **VRCDN**) publish the same stream under several schemes. The `BasisMediaPlayerStreaming` helper can pick the right one for you: enable **Auto Select Per Platform** and fill in **Pc Url** (RTSPT) and **Quest Url** (MPEG-TS). On a desktop or VR build it uses the PC URL; on an Android/Quest build it uses the Quest URL.
+Many streaming services publish the same stream under several schemes. The `BasisMediaPlayerStreaming` helper can pick the right one for you: enable **Auto Select Per Platform** and fill in **Pc Url** (RTSPT) and **Quest Url** (MPEG-TS). On a desktop or VR build it uses the PC URL; on an Android/Quest build it uses the Quest URL.
 </Callout>
 
 ## Displaying the video
@@ -193,7 +193,7 @@ Drive the player from your own components through its public API.
 
 ```csharp
 // Load and control
-player.LoadUrl("rtspt://stream.vrcdn.live/live/vrcdn"); // auto-plays by default
+player.LoadUrl("rtspt://stream.example.com/live/mystream"); // auto-plays by default
 player.Play();
 player.Pause();
 player.Resume();
