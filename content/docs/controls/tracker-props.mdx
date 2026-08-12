@@ -1,0 +1,57 @@
+---
+title: Tracker Props
+description: Bind a spare VR tracker to a spawned prop so the prop follows a real-world object, for everyone in the instance.
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+
+## Overview
+
+If you have a spare tracker that isn't being used for [full body tracking](/en/docs/controls/full-body-tracking), you can bind it to a prop you've spawned from your library. The prop then follows the tracker in real time, so a physical object can drive its virtual counterpart.
+
+The classic example: strap a tracker to a real chair, bind it to a matching chair prop, and the virtual chair moves with the real one. Everyone in the instance sees the tracker-driven motion, not just you.
+
+## Binding a tracker
+
+1. Spawn the prop from your library as normal.
+2. Open the library menu and go to the **Instantiated** tab.
+3. Move the tracker close to the prop, within the same reach you'd need to grab it.
+4. Press the tracker button on the prop's row. A picker opens listing your eligible spare trackers.
+5. Choose a tracker. The prop snaps to following it, keeping the offset between them from the moment you bound.
+
+{/* IMAGE PLACEHOLDER
+    File:  public/img/controls/tracker-prop-binding.png
+    Show:  the Instantiated tab with a prop row's tracker button pressed and the tracker picker open.
+    When ready, replace this comment with:
+    ![Binding a spare tracker to a spawned prop](/img/controls/tracker-prop-binding.png)
+*/}
+
+Because the offset is captured at bind time, line the tracker up with the physical object first, then bind. Rebinding recaptures the offset if the alignment drifts.
+
+## Rules
+
+- **The tracker must be in range.** Binding uses the same reach rule as grabbing the prop (with a 1 m fallback for props that have no pickup). The picker only lists trackers currently in range, so you can't drive a prop from across the scene.
+- **One tracker drives one prop.** A tracker already driving something won't be offered for a second binding.
+- **Props only.** Scenes, avatars, embedded items and static-locked items don't get the tracker button.
+- **Body trackers are excluded.** Trackers assigned to a body role by full body tracking are never offered, so binding can't steal a limb mid-session.
+
+## While bound
+
+- The prop can't be grabbed locally; unbind it first if you want to pick it up.
+- The binding takes network ownership of the prop, and its motion streams to remote players through the normal prop sync at full rate.
+- Your trackers are local devices. Remote players can never see or bind them; they just see the prop moving.
+- If two players try to bind the same prop, it resolves through the normal ownership rules, the same as two people grabbing for the same item.
+
+## Unbinding
+
+Press the tracker button on the prop's row again to release the binding. The prop stays where the tracker left it and goes back to behaving like any other spawned prop.
+
+A binding also releases itself automatically when it loses the prop or the tracker:
+
+- another player takes ownership of the prop,
+- the prop is static-locked or removed,
+- or the tracker powers off / disconnects.
+
+<Callout type="info">
+An automatic release is silent and harmless. If your prop stops following its tracker, check the tracker is still powered and tracking, then bind again from the **Instantiated** tab.
+</Callout>
